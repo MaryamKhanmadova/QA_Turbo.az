@@ -21,6 +21,16 @@ describe('template spec', () => {
         cy.get('button[name="commit"]').click()
 
         cy.get('.products-i').should('have.length', 3)
-        cy.pause()
+        // cy.visit('/autos/7914125-bmw-230')
+
+        cy.get('.products-i__link').invoke('attr', 'href').then((attributeValue) => {
+            cy.visit(attributeValue)
+        });
+
+        cy.get(".product-phones__btn").click();
+
+        cy.get('.product-phones__list-i').invoke('text').then((text) => {
+            cy.log(text);
+        });
     })
 })
